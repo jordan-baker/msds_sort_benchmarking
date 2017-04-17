@@ -7,15 +7,19 @@ import os
 import csv
 import pandas as pd
 import math
+import numpy as np
 from datetime import datetime
 import multiprocessing as mp
+import random
 random.seed(540)
 
-path = "/Users/jordanbaker/Downloads"
-os.chdir(path)
+
 
 mu, sigma = 0, 0.1 # mean and standard deviation
-s = np.random.normal(mu, sigma, 500000)
+#s = list(np.random.normal(mu, sigma, 500000))
+s1 = list(np.random.normal(mu, sigma, 10))
+s2= list(np.random.normal(mu, sigma, 10))
+s=[s1,s2]
 t = np.random.normal(mu, sigma, 1000000)
 u = np.random.normal(mu, sigma, 2000000)
 
@@ -23,15 +27,17 @@ ss = np.random.choice(100, 500000, replace=True)
 tt = np.random.choice(100, 1000000, replace=True)
 uu = np.random.choice(100, 2000000, replace=True)
 
+
 # Define an output queue
 output = mp.Queue()
 
 
 
 
+
 ##### Merge Sort #####
 def mergeSort(alist):
-    print("Splitting ",alist)
+    #print("Splitting ",alist)
     if len(alist)>1:
         mid = len(alist)//2
         lefthalf = alist[:mid]
@@ -61,7 +67,7 @@ def mergeSort(alist):
             alist[k]=righthalf[j]
             j=j+1
             k=k+1
-    print("Merging ",alist)
+    #print("Merging ",alist)
     
     
 ##### Quick Sort #####
@@ -113,7 +119,7 @@ def partition(alist,first,last):
 #### MapReduce #####
 temp = [0.1, -0.5, 0.9, 0.40, -0.8, -0.81, -0.88, -0.81, -0.82, -0.83, -0.87]
 
-def mapreduce(alist):
+def mapper(alist):
     
     startTime = datetime.now()
 
@@ -191,42 +197,43 @@ def mapreduce(alist):
                    key_list_4, key_list_3, key_list_2, key_list_1, key_list0, key_list1,
                    key_list2, key_list3, key_list4, key_list5, key_list6, key_list7,
                    key_list8, key_list9, key_list10]
-                   
-    for i in key_lists:
-        mergeSort(i)
-        #quickSort(i)
-        
-    print(key_lists)    
-    print(datetime.now() - startTime)
-    return key_lists
-    
+    key_lists_neg=[key_list_10, key_list_9, key_list_8, key_list_7, key_list_6, key_list_5,
+                   key_list_4, key_list_3, key_list_2, key_list_1, key_list0]
+    key_lists_pos=[key_list1,key_list2, key_list3, key_list4, key_list5, key_list6, key_list7,
+                   key_list8, key_list9, key_list10]              
+    key_lists=[key_lists_neg,key_lists_pos]
+    time=datetime.now() - startTime
+    return key_lists, time
 
-output = mapreduce(temp)
-print(kerry)
+def reducer(a_list):
+    startTime = datetime.now()
+    for i in a_list:
+            mergeSort(i)
+            #quickSort(i)
+    print(a_list)    
+    time=datetime.now() - startTime
+    return a_list, time
 
-output = mapreduce(s)
+#output = mapreduce(s)
 
-
-    
-    
-    
-    
-
-# Setup a list of processes that we want to run
-processes = [mp.Process(target=rand_string, args=(5, x, output)) for x in range(4)]
-
-# Run processes
-for p in processes:
-    p.start()
-
-# Exit the completed processes
-for p in processes:
-    p.join()
-
-# Get process results from the output queue
-results = [output.get() for p in processes]
-
-print(results)
 
     
+    
+       
+from multiprocessing.dummy import Pool as ThreadPool
+pool=ThreadPool(2)
+results=pool.map(mapper,s)
+
+neg_list=results[0][0][0]+results[1][0][0]
+pos_list=results[0][0][1]+results[1][0][1]
+master_list=neg_list+pos_list
+time_delta=[results[0][1],results[1][1]]
+#results[0][1]/results[1][1]=time_delta
+#results[0][0][0]=first negative list
+#results[0][0][1]=first positive list
+
+#####FIX THIS LATER--lists aren't in order #####
+from multiprocessing.dummy import Pool as ThreadPool
+pool=ThreadPool(2)
+results=pool.map(reducer,master_list)    
 
