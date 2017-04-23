@@ -66,7 +66,7 @@ for i in sys.stdin:
     if (current_key == key):
         value_list.append(value)
     else:
-        output = mergeSort(value_list)
+        output = quickSort(value_list)
         print(output)
         current_key = key
         value_list = []
