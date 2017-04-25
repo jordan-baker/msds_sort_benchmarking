@@ -5,9 +5,9 @@
 import os
 import sys
 import csv
-import pandas as pd
+#import pandas as pd
 import math
-import numpy as np
+#import numpy as np
 
 
 #temp = [0.1, -0.5, 0.9, 0.40, -0.8, -0.81, -0.88, -0.81, -0.82, -0.83, -0.87]

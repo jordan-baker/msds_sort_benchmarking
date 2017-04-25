@@ -3,9 +3,9 @@
 import os
 import csv
 import sys
-import pandas as pd
+#import pandas as pd
 import math
-import numpy as np
+#import numpy as np
 from operator import itemgetter
 
 
