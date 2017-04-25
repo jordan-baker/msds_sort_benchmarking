@@ -7,7 +7,8 @@ import sys
 import math
 #import numpy as np
 from operator import itemgetter
-
+#up the recursion limit to avoid errors
+sys.setrecursionlimit(100000)
 
 
 def quickSort(alist):
