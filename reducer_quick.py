@@ -13,7 +13,7 @@ sys.setrecursionlimit(100000)
 
 def quickSort(alist):
    quickSortHelper(alist,0,len(alist)-1)
-   
+   return(alist)
 
 def quickSortHelper(alist,first,last):
    if first<last:
