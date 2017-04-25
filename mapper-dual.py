@@ -6,8 +6,6 @@ Created on Tue Apr 25 12:04:22 2017
 @author: frankiezeager
 """
 
-#!/usr/bin/env python
-
 #### MapReduce #####
 
 import os
@@ -47,7 +45,7 @@ for i in sys.stdin:
     key, value = i.split(',', 1)
     value = value.strip('\n')
     value = float(value)
-    new_key = math.floor(value*10)
+    new_key = key
     print('%s\t%s,%s' % (new_key, key, value))
 
 #    key_pair = [i, key]
