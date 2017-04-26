@@ -45,8 +45,7 @@ for i in sys.stdin:
     key, value = i.split(',', 1)
     value = value.strip('\n')
     value = float(value)
-    new_key = key
-    print('%s\t%s,%s' % (new_key, key, value))
+    print('%s\t%s' % (key, value))
 
 #    key_pair = [i, key]
 
