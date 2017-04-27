@@ -55,14 +55,15 @@ def partition(alist,first,last):
 
    
    
-current_key = None
-key = None
+current_key = -100
+key = -101
 value_list = []
 
 for i in sys.stdin:
     key, value = i.split('\t', 1)
     value = value.strip('\n')
-    
+    key=int(key)
+    value=float(value)
     
     if (current_key == key):
         value_list.append(value)
