@@ -1,12 +1,9 @@
-#!/usr/bin/env python
-
 import os
-import csv
 import sys
-#import pandas as pd
+import csv
 import math
-#import numpy as np
 from operator import itemgetter
+
 #up the recursion limit to avoid errors
 sys.setrecursionlimit(100000)
 
@@ -63,8 +60,10 @@ for i in sys.stdin:
     key, value = i.split('\t', 1)
     key=int(key)
     value = value.strip('\n')
+    
     value=float(value)
     current_key=int(current_key)
+    
     if (current_key == key):
         value_list.append(value)
     else:
@@ -74,3 +73,4 @@ for i in sys.stdin:
         value_list = []
         value_list.append(value)
     
+        

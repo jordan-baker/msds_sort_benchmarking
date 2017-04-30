@@ -1,12 +1,9 @@
-#!/usr/bin/env python
-
 import os
-import csv
 import sys
-#import pandas as pd
+import csv
 import math
-#import numpy as np
 from operator import itemgetter
+
 #up the recursion limit to avoid errors
 sys.setrecursionlimit(100000)
 
@@ -22,7 +19,6 @@ def quickSortHelper(alist,first,last):
 
        quickSortHelper(alist,first,splitpoint-1)
        quickSortHelper(alist,splitpoint+1,last)
-
 
 def partition(alist,first,last):
    pivotvalue = alist[first]
@@ -62,6 +58,7 @@ value_list = []
 for i in sys.stdin:
     key, value = i.split('\t', 1)
     value = value.strip('\n')
+    
     key=int(key)
     value=float(value)
     
@@ -73,3 +70,5 @@ for i in sys.stdin:
         current_key = key
         value_list = []
         value_list.append(value)
+        
+        

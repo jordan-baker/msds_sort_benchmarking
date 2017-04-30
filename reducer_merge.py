@@ -1,13 +1,8 @@
-#!/usr/bin/env python
-
 import os
-import csv
 import sys
-#import pandas as pd
+import csv
 import math
-#import numpy as np
 from operator import itemgetter
-
 
 
 def mergeSort(alist):
@@ -53,6 +48,7 @@ value_list = []
 for i in sys.stdin:
     key, value = i.split('\t', 1)
     value = value.strip('\n')
+    
     key=int(key)
     value=float(value)
     
